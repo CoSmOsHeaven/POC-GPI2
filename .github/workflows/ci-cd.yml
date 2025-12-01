@@ -49,8 +49,13 @@ jobs:
                   node-version: "18"
                   cache: "npm"
                   cache-dependency-path: ag-prueba-front/package-lock.json
+            
             - name: Install Dependencies
               run: cd ag-prueba-front && npm ci
+
+            - name: Run ESLint
+              run: cd ag-prueba-front && npm run lint
+
             - name: Build Angular
               run: cd ag-prueba-front && npm run build -- --configuration=production
 
