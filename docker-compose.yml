@@ -1,6 +1,7 @@
 services:
     mysql-db:
         image: mysql:8.0
+        privileged: true
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: agprueba
@@ -11,6 +12,7 @@ services:
 
     auth-server:
         build: ./authorization-server
+        privileged: true
         ports:
             - "9000:9000"
         environment:
@@ -22,6 +24,7 @@ services:
 
     resource-server:
         build: ./resource-server
+        privileged: true
         ports:
             - "8080:8080"
         environment:
@@ -35,6 +38,7 @@ services:
 
     frontend:
         build: ./ag-prueba-front
+        privileged: true
         ports:
             - "4200:80"
         depends_on:
