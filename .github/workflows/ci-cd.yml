@@ -53,7 +53,7 @@ jobs:
           -Dspring.datasource.url=jdbc:mysql://127.0.0.1:3306/agprueba \
           -Dspring.datasource.username=root \
           -Dspring.datasource.password=root \
-          -Dsonar.projectKey=CoSmOsHeaven_POC-GPI2 \
+          -Dsonar.projectKey=POC-GPI2_auth \
           -Dsonar.organization=cosmosheaven \
           -Dsonar.host.url=https://sonarcloud.io
 
@@ -104,7 +104,7 @@ jobs:
           -Dspring.datasource.url=jdbc:mysql://127.0.0.1:3306/agprueba \
           -Dspring.datasource.username=root \
           -Dspring.datasource.password=root \
-          -Dsonar.projectKey=CoSmOsHeaven_POC-GPI2 \
+          -Dsonar.projectKey=POC-GPI2_resource \
           -Dsonar.organization=cosmosheaven \
           -Dsonar.host.url=https://sonarcloud.io
 
