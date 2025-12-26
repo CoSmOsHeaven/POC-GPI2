@@ -40,8 +40,8 @@ jobs:
           cd authorization-server
           # Se elimina -DskipTests para que se ejecute la cobertura
           ./mvnw clean verify sonar:sonar \
-          -Dsonar.projectKey=TU_PROJECT_KEY_AUTH_SERVER \
-          -Dsonar.organization=TU_ORGANIZACION_SONAR \
+          -Dsonar.projectKey=CoSmOsHeaven_POC-GPI2 \
+          -Dsonar.organization=cosmosheaven \
           -Dsonar.host.url=https://sonarcloud.io
 
   # JOB 2: BACKEND RESOURCE + SONARCLOUD
@@ -77,8 +77,8 @@ jobs:
         run: |
           cd resource-server
           ./mvnw clean verify sonar:sonar \
-          -Dsonar.projectKey=TU_PROJECT_KEY_RESOURCE_SERVER \
-          -Dsonar.organization=TU_ORGANIZACION_SONAR \
+          -Dsonar.projectKey=CoSmOsHeaven_POC-GPI2 \
+          -Dsonar.organization=cosmosheaven \
           -Dsonar.host.url=https://sonarcloud.io
 
   # JOB 3: FRONTEND + SONARCLOUD
