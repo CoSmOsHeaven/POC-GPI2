@@ -55,7 +55,8 @@ jobs:
           -Dspring.datasource.password=root \
           -Dsonar.projectKey=POC-GPI2_auth \
           -Dsonar.organization=cosmosheaven \
-          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.qualitygate.wait=true
 
   # JOB 2: BACKEND RESOURCE + MYSQL + SONARCLOUD
   build-resource-server:
@@ -107,7 +108,8 @@ jobs:
           -Dspring.security.oauth2.resourceserver.jwt.jwk-set-uri=https://www.googleapis.com/oauth2/v3/certs \
           -Dsonar.projectKey=POC-GPI2_resource \
           -Dsonar.organization=cosmosheaven \
-          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.qualitygate.wait=true
 
   # JOB 3: FRONTEND
   build-frontend:
