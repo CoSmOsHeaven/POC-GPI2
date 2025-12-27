@@ -3,9 +3,24 @@ name: CI/CD Pipeline
 on:
   push:
     branches: ["main"]
+  pull_request:              # <--- IMPORTANTE: Tienes que añadir esto para que funcione el aviso
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+
   # JOB 1: BACKEND AUTH + MYSQL + SONARCLOUD
   build-auth-server:
     name: Build & Analyze Auth Server
@@ -42,6 +57,21 @@ jobs:
 
       - name: Grant execute permission for mvnw
         run: chmod +x authorization-server/mvnw
+
+        # NUEVO: Generar el SBOM (Lista de ingredientes del software)
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: ./authorization-server
+          format: spdx-json
+          output-file: authorization-server-sbom.spdx.json
+
+      # NUEVO: Guardar el SBOM como artefacto para tener "Control"
+      - name: Upload SBOM Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-auth-server
+          path: authorization-server-sbom.spdx.json
 
       - name: Build and Sonar Analysis
         env:
@@ -93,6 +123,19 @@ jobs:
 
       - name: Grant execute permission for mvnw
         run: chmod +x resource-server/mvnw
+
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: ./resource-server
+          format: spdx-json
+          output-file: resource-server-sbom.spdx.json
+
+      - name: Upload SBOM Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-resource-server
+          path: resource-server-sbom.spdx.json
 
       - name: Build and Sonar Analysis
         env:
