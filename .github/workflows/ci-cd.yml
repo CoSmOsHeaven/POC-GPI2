@@ -87,6 +87,13 @@ jobs:
           -Dsonar.organization=cosmosheaven \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.qualitygate.wait=true
+      
+      - name: Archive Auth Server Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: auth-server-release-${{ github.sha }}
+          path: authorization-server/target/*.jar
+          retention-days: 30
 
   # JOB 2: BACKEND RESOURCE + MYSQL + SONARCLOUD
   build-resource-server:
@@ -153,6 +160,13 @@ jobs:
           -Dsonar.organization=cosmosheaven \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.qualitygate.wait=true
+        
+      - name: Archive Resource Server Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: resource-server-release-${{ github.sha }}
+          path: resource-server/target/*.jar
+          retention-days: 30
 
   # JOB 3: FRONTEND
   build-frontend:
@@ -190,6 +204,13 @@ jobs:
 
       - name: Build Angular Production
         run: cd ag-prueba-front && npm run build -- --configuration=production
+      
+      - name: Archive Frontend Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist-${{ github.sha }}
+          path: ag-prueba-front/dist/
+          retention-days: 30
 
   # JOB 4: DEPLOY
   deploy:
