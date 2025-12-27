@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: ["main"]
-  pull_request:              # <--- IMPORTANTE: Tienes que añadir esto para que funcione el aviso
-    branches: ["main"]
+    branches: ["develop"]
+  pull_request:
+    branches: ["develop"]
   workflow_dispatch:
 
 jobs:
@@ -195,7 +195,7 @@ jobs:
   deploy:
     needs: [build-auth-server, build-resource-server, build-frontend]
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/develop'
     environment: Production
     steps:
       - name: Simulate Deployment
